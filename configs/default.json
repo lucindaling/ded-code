@@ -1,0 +1,51 @@
+{
+  "seed": 42,
+  "data": {
+    "hf_dataset": "TimKoornstra/financial-tweets-sentiment",
+    "hf_revision": "bba602698fd6f18226f6404fd8fb637ef67fa1eb",
+    "test_fraction": 0.25,
+    "vocab_size": 10000,
+    "max_length": 128,
+    "sources": {
+      "master_thesis": "github.com/moritzwilksch/MasterThesis",
+      "stock_market_tweets": "ieee-dataport.org/open-access/stock-market-tweets-data",
+      "stockrel": "kaggle.com/datasets/mattgilgo/stock-related-tweet-sentiment",
+      "twitter_stock_sentiment": "github.com/poojathakoor/twitter-stock-sentiment"
+    }
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "weight_decay": 0.0005,
+    "max_epochs": 30,
+    "patience": 5,
+    "selection_metric": "validation macro-F1",
+    "val_fraction": 0.1,
+    "lr_recurrent": 0.001,
+    "lr_transformer": 2e-05,
+    "batch_recurrent": 64,
+    "batch_transformer": 16
+  },
+  "ded": {
+    "temperature": 5.0,
+    "loss_weights": {
+      "kl": 1.0,
+      "mean": 0.5,
+      "shape": 1.0,
+      "evi": 0.1,
+      "soft": 0.001
+    },
+    "precision_floor": 1.0,
+    "projector_hidden": 32,
+    "kd_alpha": 0.5
+  },
+  "vqc": {
+    "n_qubits": 5,
+    "n_layers": 4,
+    "backend": "exact state-vector simulation"
+  },
+  "inference": {
+    "rule": "alpha",
+    "n_views": 100,
+    "rho": 0.15
+  }
+}
